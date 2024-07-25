@@ -1,0 +1,9 @@
+---
+title: "Reclaiming Your Weekend with Data Contracts"
+format: 
+    revealjs: 
+        theme: sky
+---
+
+## This is a slide
+- About a thing!
