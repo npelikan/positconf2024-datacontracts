@@ -3,15 +3,32 @@ title: "An Example Literate Data Contract"
 format: html
 ---
 
-```{r setup, include=FALSE}
-library(pointblank)
-```
-
 # Penguins Table Contract
 
-## 
+## Purpose 
 
-```{r create_agent, echo=TRUE}
+We maintain a data table about penguins to support our biodiversity research, particularly in understanding the ecological roles and adaptations of different penguin species. This data allows us to make informed decisions on conservation efforts and assess the impact of climate change on marine ecosystems. By analyzing and comparing data across species, we can develop sustainable tourism and wildlife protection strategies. It also provides crucial insights for conducting environmental impact assessments, especially for our operations near penguin habitats. Overall, this data is essential for guiding our commitment to responsible business practices and environmental stewardship.
+
+## Key Personnel
+
+ - **Responsible:** Danielle Dataengineer (danielle.dataengineer@notional.company)
+ - **Owner:** Danielle Dataengineer (danielle.dataengineer@notional.company)
+ - **Data Users:**
+  - Bill Businessanalyst (bill.businessanalyst@notional.company)
+  - Derek Datascientist (derek.datascientist@notional.company)
+  - Monika Mlengineer (monika.mlengineer@notional.company)
+
+## Data Interface
+
+This data is stored as a csv table in S3. Storing this data in S3 ensures scalability and durability, allowing us to securely manage large volumes of penguin data as our research expands. Additionally, S3’s integration with analytical tools enables seamless access and processing, which is vital for our ongoing research and decision-making processes.
+
+## SLA
+
+No SLA is expected on this data, as it will be updated periodically as new results come in. 
+
+```{r setup, include=FALSE}
+library(pointblank)
+
 agent <-
   create_agent(
     tbl = ~ palmerpenguins::penguins,
@@ -24,21 +41,37 @@ agent <-
   ) 
 ```
 
+## Data Schema
+
+We're only studying penguins in the South Atlantic, so we only expect to see Adelie, Chinstrap and Gentoo penguins.
+
 ```{r} 
 agent <- agent %>%
   # Expect that column `species` is of type: factor
   col_is_factor(
     columns = c("species")
+  ) %>%
+  col_vals_in_set(
+    columns = c("species"),
+    set = c("Adelie", "Chinstrap", "Gentoo")
   )
 ```
+
+The island column must always be a factor.
 
 ```{r} 
 agent <- agent %>%
   # Expect that column `island` is of type: factor
   col_is_factor(
     columns = c("island")
-  ) 
+  ) %>%
+  col_vals_in_set(
+    columns = c("island"),
+    set = c("Biscoe", "Dream", "Torgersen")
+  )
 ```
+
+Bill length must be numeric. We set expectations on the value to flag anomalous measurements.
 
 ```{r} 
 agent <- agent %>%
@@ -54,6 +87,9 @@ agent <- agent %>%
     na_pass = TRUE
   ) 
 ```
+
+Bill depth must be numeric. We set expectations on the value to flag anomalous measurements.
+
 ```{r}
 agent <- agent %>%
   # Expect that column `bill_depth_mm` is of type: numeric
@@ -68,6 +104,9 @@ agent <- agent %>%
     na_pass = TRUE
   ) 
 ```
+
+Flipper length must be numeric. We set expectations on the value to flag anomalous measurements.
+
 ```{r}
 agent <- agent %>%
   # Expect that column `flipper_length_mm` is of type: integer
@@ -82,6 +121,9 @@ agent <- agent %>%
     na_pass = TRUE
   ) 
 ```
+
+Evaluate remaining schema:
+
 ```{r}
 agent <- agent %>%
   # Expect that column `body_mass_g` is of type: integer
