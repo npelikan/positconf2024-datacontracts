@@ -2,7 +2,7 @@
 
 This repository serves as supplement to the talk I delivered at posit:::conf 2024. 
 
-[**Slides**](https://docs.google.com/presentation/d/1v8QEzzbrBX85xdOb3nfhbh0I7bsz_viW6uLQIUILvPc/edit?usp=sharing)
+[**Slides**](https://docs.google.com/presentation/d/1R9nm_8LHJpkc32XAf3LYRbh9Sr97-Y8OFHHE7Ds5L18/edit?usp=sharing)
 
 ## Literate Data Contracts
 
