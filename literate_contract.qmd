@@ -160,9 +160,36 @@ agent <- agent |>
 
 
 ```{r print_agent, echo=FALSE}
+x_list <- agent |> get_agent_x_list()
+
 agent |> get_agent_report()
 ```
 
 
-## Save Validation
+## Notify people
 
+ In this section you can add notifications to make sure the right people are warned about data quality escapes. Conditional emails or slack alerts are great!
+
+
+
+## Save Validation
+```{r write_results}
+library(pins)
+library(lubridate)
+
+board <- board_connect()
+
+pin_name <- "nick.pelikan@posit.co/penguins_contract"
+
+current_run_output <- list(
+  # Save a boolean if there are any stop-level data quality issues
+  any_stops = any(x_list$stop),
+  # Save a boolean if there are any warning-level data quality issues
+  any_warnings = any(x_list$warn),
+  # Save the agent
+  agent = agent
+)
+
+pin_write(board, current_run_output, pin_name, force_identical_write = TRUE)
+
+```
