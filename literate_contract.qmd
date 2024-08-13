@@ -53,7 +53,7 @@ agent <- agent |>
   ) |>
   col_vals_in_set(
     columns = c("species"),
-    set = c("Adelie", "Chinstrap", "Gentoo")
+    set = c("Adelie", "Chinstrap", "Gentoo", "Emperor")
   )
 ```
 
@@ -67,7 +67,7 @@ agent <- agent |>
   ) |>
   col_vals_in_set(
     columns = c("island"),
-    set = c("Biscoe", "Dream", "Torgersen")
+    set = c("Biscoe", "Dream", "Torgersen", "Rothschild")
   )
 ```
 
@@ -83,7 +83,7 @@ agent <- agent |>
   col_vals_between(
     columns = c("bill_length_mm"),
     left = 32.1,
-    right = 59.6,
+    right = 90,
     na_pass = TRUE
   ) 
 ```
@@ -100,7 +100,7 @@ agent <- agent |>
   col_vals_between(
     columns = c("bill_depth_mm"),
     left = 13.1,
-    right = 21.5,
+    right = 50,
     na_pass = TRUE
   ) 
 ```
@@ -117,7 +117,7 @@ agent <- agent |>
   col_vals_between(
     columns = c("flipper_length_mm"),
     left = 172,
-    right = 231,
+    right = 400,
     na_pass = TRUE
   ) 
 ```
