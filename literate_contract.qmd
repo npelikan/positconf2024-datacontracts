@@ -46,11 +46,11 @@ agent <-
 We're only studying penguins in the South Atlantic, so we only expect to see Adelie, Chinstrap and Gentoo penguins.
 
 ```{r} 
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `species` is of type: factor
   col_is_factor(
     columns = c("species")
-  ) %>%
+  ) |>
   col_vals_in_set(
     columns = c("species"),
     set = c("Adelie", "Chinstrap", "Gentoo")
@@ -60,11 +60,11 @@ agent <- agent %>%
 The island column must always be a factor.
 
 ```{r} 
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `island` is of type: factor
   col_is_factor(
     columns = c("island")
-  ) %>%
+  ) |>
   col_vals_in_set(
     columns = c("island"),
     set = c("Biscoe", "Dream", "Torgersen")
@@ -74,11 +74,11 @@ agent <- agent %>%
 Bill length must be numeric. We set expectations on the value to flag anomalous measurements.
 
 ```{r} 
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `bill_length_mm` is of type: numeric
   col_is_numeric(
     columns = c("bill_length_mm")
-  ) %>%
+  ) |>
   # Expect that values in `bill_length_mm` should be between `32.1` and `59.6`
   col_vals_between(
     columns = c("bill_length_mm"),
@@ -91,11 +91,11 @@ agent <- agent %>%
 Bill depth must be numeric. We set expectations on the value to flag anomalous measurements.
 
 ```{r}
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `bill_depth_mm` is of type: numeric
   col_is_numeric(
     columns = c("bill_depth_mm")
-  ) %>%
+  ) |>
   # Expect that values in `bill_depth_mm` should be between `13.1` and `21.5`
   col_vals_between(
     columns = c("bill_depth_mm"),
@@ -108,11 +108,11 @@ agent <- agent %>%
 Flipper length must be numeric. We set expectations on the value to flag anomalous measurements.
 
 ```{r}
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `flipper_length_mm` is of type: integer
   col_is_integer(
     columns = c("flipper_length_mm")
-  ) %>%
+  ) |>
   # Expect that values in `flipper_length_mm` should be between `172` and `231`
   col_vals_between(
     columns = c("flipper_length_mm"),
@@ -125,23 +125,23 @@ agent <- agent %>%
 Evaluate remaining schema:
 
 ```{r}
-agent <- agent %>%
+agent <- agent |>
   # Expect that column `body_mass_g` is of type: integer
   col_is_integer(
     columns = c("body_mass_g")
-  ) %>%
+  ) |>
   # Expect that column `sex` is of type: factor
   col_is_factor(
     columns = c("sex")
-  ) %>%
+  ) |>
   # Expect that column `year` is of type: integer
   col_is_integer(
     columns = c("year")
-  ) %>%
+  ) |>
   # Expect entirely distinct rows across `species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, year`
   rows_distinct(
     columns = c("species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, year")
-  ) %>%
+  ) |>
   # Expect that column schemas match
   col_schema_match(
     schema = col_schema(
@@ -154,12 +154,15 @@ agent <- agent %>%
       sex = "factor",
       year = "integer"
     )
-  ) %>%
+  ) |>
   interrogate()
 ```
 
 
 ```{r print_agent, echo=FALSE}
-agent
+agent |> get_agent_report()
 ```
+
+
+## Save Validation
 
