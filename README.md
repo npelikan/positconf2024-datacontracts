@@ -2,6 +2,8 @@
 
 This repository serves as supplement to the talk I delivered at posit:::conf 2024. 
 
+[**Slides**](https://docs.google.com/presentation/d/1v8QEzzbrBX85xdOb3nfhbh0I7bsz_viW6uLQIUILvPc/edit?usp=sharing)
+
 ## Literate Data Contracts
 
 You can find an example of a Literate Data contract at literate_contract.qmd. This is written in R, and uses the `pointblank` package, however you can use Python and Great Expectations as well!
